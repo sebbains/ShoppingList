@@ -1,3 +1,6 @@
+// add variables CSS
+
+
 let shoppingItems = [];
 const shoppingList = document.getElementById("shoppingList");
 const newListItem = document.getElementById("newItem");
@@ -37,25 +40,12 @@ function clearItems(){
     outputContainer.style.display="none";
 }
 
-function editOrDeleteItem(event){
-    // console.log(event.target.parentNode.nodeName);
-    if(event.target.className ==="delete"){
-        deleteItem(event);
-    }else{
-        editItem(event);
-    }
-}
-
-function deleteItem(event){
-    let removeLi = event.target.parentNode;
-    let ulItems = removeLi.parentNode;
-    ulItems.removeChild(removeLi);
-    console.log(shoppingItems);
-    
-    if(shoppingItems.length=0){
-        //hide list
-        clearItemsBtn.style.display="none";
-        outputContainer.style.display="none";
-    }
-}
+// function editOrDeleteItem(event){
+//     // console.log(event.target.parentNode.nodeName);
+//     if(event.target.className ==="delete"){
+//         deleteItem(event);
+//     }else{
+//         editItem(event);
+//     }
+// }
 

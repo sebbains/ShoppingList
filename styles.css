@@ -104,3 +104,12 @@ li{
     padding: 0.25em 0;
     display: none;
 }
+
+svg {
+    max-width: 25px;
+  }
+  
+  /* define the normal color */
+  svg path {
+    fill: red;
+  }

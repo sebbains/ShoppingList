@@ -10,3 +10,4 @@ Simple Shopping List project.
 
 ## Resources
 Photo by nrd on Unsplash
+Icons made by [Freepik](https://www.flaticon.com/authors/freepik) and [Becris](https://www.flaticon.com/authors/becris) from [www.flaticon.com](https://www.flaticon.com/) 
