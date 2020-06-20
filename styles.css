@@ -35,8 +35,8 @@ form,
     flex-direction: column;
 }
 
-.outputContainer,
-#clearItems{
+/* #clearItems, */
+.outputContainer{
     display: none;
 }
 
@@ -91,10 +91,11 @@ li{
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid gray;
-    padding: 0.5em;
+    /* padding: 0.5em; */
     margin: 0.5em;
     font-size: 15px;
 }
+
 
 .alert{
     color: #790e00;
@@ -106,10 +107,38 @@ li{
 }
 
 svg {
-    max-width: 25px;
-  }
+    width: 20px;
+}
   
-  /* define the normal color */
-  svg path {
-    fill: red;
-  }
+li button{
+    background: none;
+    outline: none;
+}
+
+/* delete button*/
+.deleteButton svg path {
+    fill: #790e00;
+}
+.deleteButton:hover svg path {
+    fill: #ee7869;
+}
+
+/* complete button*/
+.completeButton svg path {
+    fill: #009451;
+}
+.completeButton:hover svg path {
+    fill: #00c06a;
+}
+
+
+.completed{
+    text-decoration: line-through;
+    color: gray;
+}
+.completed .completeButton svg path {
+    fill: gray;
+}
+.completed .completeButton:hover svg path {
+    fill: gray;
+}

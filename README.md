@@ -9,5 +9,5 @@ Simple Shopping List project.
 * Delete list items
 
 ## Resources
-Photo by nrd on Unsplash
+Photo by nrd on Unsplash.  
 Icons made by [Freepik](https://www.flaticon.com/authors/freepik) and [Becris](https://www.flaticon.com/authors/becris) from [www.flaticon.com](https://www.flaticon.com/) 
