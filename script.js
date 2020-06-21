@@ -112,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function completeLI(){
-        console.log("complete item not yet set");
         //grab li via parent node (button -> li)
         const item = this.parentNode;
         //add completed li class
@@ -120,10 +119,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     clearButton.addEventListener("click",()=>{
-        //set front ul
+        //set front ul and li
         const shoppingUL = document.querySelector("#shoppingList");
+        const items = document.querySelectorAll("li");
         //run through all child list items
-            //if class is completed, remove
+        items.forEach((item)=>{
+             // if class is completed, remove from ul
+            if(item.classList.contains("completed")){
+                shoppingUL.removeChild(item);
+            }
+        });
 
         //check if no items left, hide list
         if(shoppingUL.children.length==0){
