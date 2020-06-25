@@ -101,7 +101,11 @@ ul{
 .dampen > li > button > svg path,
 .dampen > li > button:hover > svg path,
 .dampen > li > div > button > svg path,
-.dampen > li > div > button:hover > svg path{
+.dampen > li > div > button:hover > svg path,
+.dampen > li > div > button > svg rect,
+.dampen > li > div > button:hover > svg rect,
+.dampen > li > div > button > svg polygon,
+.dampen > li > div > button:hover > svg polygon{
     fill: lightgray;
 }
 
