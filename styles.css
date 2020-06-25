@@ -95,6 +95,16 @@ ul{
     margin: 0;
 }
 
+.dampen{
+    color: lightgray;
+}
+.dampen > li > button > svg path,
+.dampen > li > button:hover > svg path,
+.dampen > li > div > button > svg path,
+.dampen > li > div > button:hover > svg path{
+    fill: lightgray;
+}
+
 li{
     display: flex;
     flex-direction: row;
@@ -134,10 +144,14 @@ li button{
 }
 
 /* edit button*/
-.editButton svg path {
+.editButton svg path,
+.editButton svg polygon,
+.editButton svg rect {
     fill: #f19f41;
 }
-.editButton:hover svg path {
+.editButton:hover svg path,
+.editButton:hover svg polygon,
+.editButton:hover svg rect {
     fill: #ffcf4c;
 }
 

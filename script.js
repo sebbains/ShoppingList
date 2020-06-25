@@ -1,6 +1,3 @@
-//change edit svg
-//disable amend/complete buttons when clicked
-
 //Event listener to run code when page is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -194,11 +191,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function editLI(){
+        //disable all li buttons
+        const buttons = document.querySelectorAll('.editButton, .deleteButton, .completeButton');
+        buttons.forEach((button)=>{
+            button.disabled = true;
+            button.classList.add = "dampen";
+        });
+
         //grab li via parent nodes (button -> div -> li)
         const item = this.parentNode.parentNode;
-        //populate text input with current value
-        // addText.value += item.innerText;
-        //add edit class
+
+        //dampen list items
+        const shoppingUL = document.getElementById("shoppingList");
+        shoppingUL.classList.add("dampen");
 
         //hide add text input
         addText.style.display = "none";
@@ -231,7 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
             //grab text input
             let updatedItem = updateText.value;
-            console.log(updatedItem);
             //check if empty
             if(updatedItem!=""){
                 //check if already on list by
@@ -262,6 +266,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     //show add text input and button
                     addButton.style.display="block";
                     addText.style.display="block";
+                    //undampen list
+                    shoppingUL.classList.remove("dampen");
+                    //reenable all li buttons
+                    buttons.forEach((button)=>{
+                        button.disabled = false;
+                        button.classList.remove("dampen");
+                    });
                 }
             }else{
                 //show empty error message
@@ -296,6 +307,8 @@ document.addEventListener("DOMContentLoaded", () => {
         //checks for no items removed error msg
         if (!completedCount>0){
            error("complete"); 
+        }else{
+            error("clear");
         }
 
         //check if no items left, hide list
