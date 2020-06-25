@@ -71,6 +71,15 @@ button{
     border: none;
 }
 
+#updateItem{
+    background-color: #f19f41;
+}
+#updateItem:focus{
+    background-color: #ffcf4c;
+    outline: none;
+    border: none;
+}
+
 #clearItems{
     background-color: #9c200f;
 }
@@ -83,6 +92,7 @@ button{
 ul{
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 li{
@@ -121,6 +131,14 @@ li button{
 }
 .deleteButton:hover svg path {
     fill: #ee7869;
+}
+
+/* edit button*/
+.editButton svg path {
+    fill: #f19f41;
+}
+.editButton:hover svg path {
+    fill: #ffcf4c;
 }
 
 /* complete button*/

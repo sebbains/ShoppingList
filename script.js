@@ -1,4 +1,5 @@
-//add edit ability, complete error messages
+//change edit svg
+//disable amend/complete buttons when clicked
 
 //Event listener to run code when page is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,8 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
            s204.8,91.692,204.8,204.8C443.611,351.991,351.991,443.611,238.933,443.733z"/></g></g><g><g><path d="M370.046,141.534c-6.614-6.388-17.099-6.388-23.712,0v0L187.733,300.134l-56.201-56.201
            c-6.548-6.78-17.353-6.967-24.132-0.419c-6.78,6.548-6.967,17.353-0.419,24.132c0.137,0.142,0.277,0.282,0.419,0.419
            l68.267,68.267c6.664,6.663,17.468,6.663,24.132,0l170.667-170.667C377.014,158.886,376.826,148.082,370.046,141.534z"/></g></g></svg>`;
-
-   //TO ADD search and check if already on shopping list
+    let editSVG = '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g><g><polygon points="51.2,353.28 0,512 158.72,460.8 		"/></g></g><g><g><rect x="89.73" y="169.097" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -95.8575 260.3719)" width="353.277" height="153.599"/></g></g><g>	<g><path d="M504.32,79.36L432.64,7.68c-10.24-10.24-25.6-10.24-35.84,0l-23.04,23.04l107.52,107.52l23.04-23.04 C514.56,104.96,514.56,89.6,504.32,79.36z"/></g></g></svg>'
 
    // user clicks add button
    addButton.addEventListener("click", function(e){
@@ -31,20 +31,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //check if empty
         if(newItem!=""){
-            //run add item to shopping list
-            addNewItem(newItem);
-            //clear text field
-            addText.value = "";
-            //clear alert message
-            error("clear");
-            //show list and clear button
-            clearButton.style.display="block";
-            outputContainer.style.display="flex";
+            //check if already on list by
+            // grab all list items
+            const items = document.querySelectorAll("li");
+            //set list to check
+            const currentList = [];
+            //iterate through list items and add text only
+            items.forEach((item)=>{
+                currentList.push(item.innerText);
+            });
+            //compares to input
+            if(currentList.includes(newItem)){
+                error("dup");
+            }else{
+                //run add item to shopping list
+                addNewItem(newItem);
+                //clear text field
+                addText.value = "";
+                //clear alert message
+                error("clear");
+                //show list and clear button
+                clearButton.style.display="block";
+                outputContainer.style.display="flex";
+            }
         }else{
             //show empty error message
             error("empty");
         }
     });
+
+    // user hits enter in text input
+    addText.addEventListener("keypress", function(e){
+        // did the user press *enter*? if yes then continue
+        if (e.keyCode === 13){
+            let newItem = addText.value;
+
+            //check if empty
+            if(newItem!=""){
+                //check if already on list by
+                // grab all list items
+                const items = document.querySelectorAll("li");
+                //set list to check
+                const currentList = [];
+                //iterate through list items and add text only
+                items.forEach((item)=>{
+                    currentList.push(item.innerText);
+                });
+                //compares to input
+                if(currentList.includes(newItem)){
+                    error("dup");
+                }else{
+                    //run add item to shopping list
+                    addNewItem(newItem);
+                    //clear text field
+                    addText.value = "";
+                    //clear alert message
+                    error("clear");
+                    //show list and clear button
+                    clearButton.style.display="block";
+                    outputContainer.style.display="flex";
+                }
+            }else{
+                //show empty error message
+                error("empty");
+            }
+        };
+    });
+
 
     function error(err){
         //grab error box, create error text
@@ -103,7 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
         //add entered text to li
         newLI.appendChild(liText);
 
-        // create and add future edit button
+        // create li edit button
+        const editButton = document.createElement('button');
+        editButton.classList.add("editButton");
+        editButton.innerHTML = editSVG;
+        editButton.addEventListener("click",editLI);
 
         //create li delete button
         const deleteButton = document.createElement('button');
@@ -111,16 +168,20 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteButton.innerHTML = deleteSVG;
         deleteButton.addEventListener("click",deleteLI);
 
-        //add delete button to li
-        newLI.appendChild(deleteButton);
+        //create container div for edit/delete
+        const container = document.createElement('div');
+        container.appendChild(editButton);
+        //add edit/delete container to li
+        container.appendChild(deleteButton);
+        newLI.appendChild(container);
 
         //add completed li to front of ul
         shoppingUL.insertBefore(newLI,shoppingUL.childNodes[0]);
     };
 
     function deleteLI(){
-        //grab li via parent node (button -> li)
-        const item = this.parentNode;
+        //grab li via parent nodes (button -> div -> li)
+        const item = this.parentNode.parentNode;
         //grab ul via parent node (li -> ul)
         const list = item.parentNode;
         //remove li from list
@@ -130,6 +191,83 @@ document.addEventListener("DOMContentLoaded", () => {
             clearButton.style.display="none";
             outputContainer.style.display="none";
         }
+    }
+
+    function editLI(){
+        //grab li via parent nodes (button -> div -> li)
+        const item = this.parentNode.parentNode;
+        //populate text input with current value
+        // addText.value += item.innerText;
+        //add edit class
+
+        //hide add text input
+        addText.style.display = "none";
+        //create update text input
+        const updateText = document.createElement("input");
+        updateText.setAttribute("id","updateText");
+        updateText.setAttribute("type","text");
+        updateText.innerText = "update";
+        //set previous item text
+        updateText.value = item.innerText;
+
+        //hide add button
+        addButton.style.display = "none";
+        //create update button
+        const updateButton = document.createElement("button");
+        updateButton.setAttribute("id","updateItem");
+        updateButton.innerText = "update";
+
+        //grab shopping form to add new elements
+        const form = document.getElementById("shoppingForm");
+        //add update text to start of form
+        form.insertBefore(updateText,form.childNodes[0]);
+        //add update button to end of form
+        form.appendChild(updateButton);
+
+        //event to save edited item
+        updateButton.addEventListener("click", function(e){
+            //prevents page refresh, esp Edge
+            e.preventDefault();
+    
+            //grab text input
+            let updatedItem = updateText.value;
+            console.log(updatedItem);
+            //check if empty
+            if(updatedItem!=""){
+                //check if already on list by
+                // grab all list items
+                const items = document.querySelectorAll("li");
+                //set list to check
+                const currentList = [];
+                //iterate through list items and add text only
+                items.forEach((item)=>{
+                    currentList.push(item.innerText);
+                });
+                //compares to input
+                if(currentList.includes(updatedItem)){
+                    error("dup");
+                }else{
+                    //assigns current list item to updated text
+                    //grab list item inner text (li -> p -> text)
+                    const itemtext = item.childNodes[1];
+                    //set to newly updated item
+                    itemtext.innerHTML = updatedItem;
+                    //clear text field
+                    addText.value = "";
+                    //clear alert message
+                    error("clear");
+                    //remove created update text input and button
+                    form.removeChild(updateText);
+                    form.removeChild(updateButton);
+                    //show add text input and button
+                    addButton.style.display="block";
+                    addText.style.display="block";
+                }
+            }else{
+                //show empty error message
+                error("empty");
+            }
+        });
     }
 
     function completeLI(){
