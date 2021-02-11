@@ -35,8 +35,8 @@ form,
     flex-direction: column;
 }
 
-.outputContainer,
-#clearItems{
+/* #clearItems, */
+.outputContainer{
     display: none;
 }
 
@@ -71,6 +71,15 @@ button{
     border: none;
 }
 
+#updateItem{
+    background-color: #f19f41;
+}
+#updateItem:focus{
+    background-color: #ffcf4c;
+    outline: none;
+    border: none;
+}
+
 #clearItems{
     background-color: #9c200f;
 }
@@ -83,6 +92,21 @@ button{
 ul{
     list-style: none;
     padding: 0;
+    margin: 0;
+}
+
+.dampen{
+    color: lightgray;
+}
+.dampen > li > button > svg path,
+.dampen > li > button:hover > svg path,
+.dampen > li > div > button > svg path,
+.dampen > li > div > button:hover > svg path,
+.dampen > li > div > button > svg rect,
+.dampen > li > div > button:hover > svg rect,
+.dampen > li > div > button > svg polygon,
+.dampen > li > div > button:hover > svg polygon{
+    fill: lightgray;
 }
 
 li{
@@ -91,10 +115,11 @@ li{
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid gray;
-    padding: 0.5em;
+    /* padding: 0.5em; */
     margin: 0.5em;
     font-size: 15px;
 }
+
 
 .alert{
     color: #790e00;
@@ -103,4 +128,53 @@ li{
     margin: 0 0.5em;
     padding: 0.25em 0;
     display: none;
+}
+
+svg {
+    width: 20px;
+}
+  
+li button{
+    background: none;
+    outline: none;
+}
+
+/* delete button*/
+.deleteButton svg path {
+    fill: #790e00;
+}
+.deleteButton:hover svg path {
+    fill: #ee7869;
+}
+
+/* edit button*/
+.editButton svg path,
+.editButton svg polygon,
+.editButton svg rect {
+    fill: #f19f41;
+}
+.editButton:hover svg path,
+.editButton:hover svg polygon,
+.editButton:hover svg rect {
+    fill: #ffcf4c;
+}
+
+/* complete button*/
+.completeButton svg path {
+    fill: #009451;
+}
+.completeButton:hover svg path {
+    fill: #00c06a;
+}
+
+
+.completed{
+    text-decoration: line-through;
+    color: gray;
+}
+.completed .completeButton svg path {
+    fill: gray;
+}
+.completed .completeButton:hover svg path {
+    fill: gray;
 }
